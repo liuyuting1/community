@@ -29,4 +29,13 @@ public interface CommunityConstant {
      * 记住状态的登录凭证超时时间
      */
     int REMEMBER_EXPIRED_SECONDS=3600*24*100;
+
+    /**
+     * 帖子实体
+     */
+    int ENTITY_POST=1;
+    /**
+     * 评论实体
+     */
+    int ENTITY_COMMENT=2;
 }

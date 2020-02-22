@@ -7,31 +7,18 @@ import java.util.Date;
  * @Author: lvzil
  * @Date: 2020/2/17 11:12
  */
-public class DiscussPost {
-    private  int id;
-    private  int userId;
-    private  String title;
-    private String context;
-    private  int type;
-    private  int status;
-    private  int comment;
-    private  double score ;
-    private Date createTime;
 
-    @Override
-    public String toString() {
-        return "DiscussPost{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
-                ", title='" + title + '\'' +
-                ", context='" + context + '\'' +
-                ", type=" + type +
-                ", status=" + status +
-                ", comment=" + comment +
-                ", score=" + score +
-                ", createTime=" + createTime +
-                '}';
-    }
+public class DiscussPost {
+
+    private int id;
+    private int userId;
+    private String title;
+    private String content;
+    private int type;
+    private int status;
+    private Date createTime;
+    private int commentCount;
+    private double score;
 
     public int getId() {
         return id;
@@ -57,12 +44,12 @@ public class DiscussPost {
         this.title = title;
     }
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public int getType() {
@@ -81,12 +68,20 @@ public class DiscussPost {
         this.status = status;
     }
 
-    public int getComment() {
-        return comment;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setComment(int comment) {
-        this.comment = comment;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 
     public double getScore() {
@@ -97,11 +92,18 @@ public class DiscussPost {
         this.score = score;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    @Override
+    public String toString() {
+        return "DiscussPost{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", type=" + type +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", commentCount=" + commentCount +
+                ", score=" + score +
+                '}';
     }
 }

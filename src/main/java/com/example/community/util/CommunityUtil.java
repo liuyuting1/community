@@ -1,8 +1,12 @@
 package com.example.community.util;
 
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.DigestUtils;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -26,5 +30,31 @@ public class CommunityUtil {
         return DigestUtils.md5DigestAsHex(key.getBytes());
     }
 
+    public static  String getJSonString(int code, String msg, Map<String,Object> map) {
+        JSONObject json=new JSONObject();
+        json.put("code",code);
+        json.put("msg",msg);
+        if(map!=null){
+           for(String key:map.keySet()){
+               json.put(key,map.get(key));
+           }
+        }
+        return  json.toJSONString();
+    }
+    public static  String getJSonString(int code, String msg){
+        return  getJSonString(code,msg,null);
+    }
+    public static  String getJSonString(int code ) {
+        return getJSonString(code,null,null);
+    }
 
-}
+    public static void main(String[] args) {
+        Map<String,Object> map=new HashMap<>();
+        map.put("name","zhangsan");
+        map.put("age",20);
+        System.out.println(getJSonString(0,"sdsdsdsd",map));
+    }
+
+
+
+    }
