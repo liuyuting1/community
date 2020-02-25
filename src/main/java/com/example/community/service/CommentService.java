@@ -41,9 +41,18 @@ public class CommentService implements CommunityConstant {
         return commentMapper.selectCountByEntity(entityType, entityId);
     }
 
+    public  int finduserId(int id){
+        return commentMapper.selectUserIDbyId(id);
+    }
+
     /**
      * 由spring来负责数据库的打开，提交，回滚
      * 读取已提交的数据。如果有事务就加入事务，没有就创建一个
+     * @param comment
+     * @return
+     */
+    /**
+     * 事务管理，保证要么全成功要么全失败
      * @param comment
      * @return
      */
@@ -58,7 +67,7 @@ public class CommentService implements CommunityConstant {
        //更新帖子评论数量
         if(comment.getEntity_type()==ENTITY_POST){
             int count=commentMapper.selectCountByEntity(comment.getEntity_type(),comment.getEntity_id());
-          //  discusspostService.updateCommentCount(comment.getEntity_id(),count);
+            discusspostService.updateCommentCount(comment.getEntity_id(),count);
         }
 
         return  rows;
