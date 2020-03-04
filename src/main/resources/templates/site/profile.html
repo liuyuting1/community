@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -81,6 +81,7 @@
 					<div class="media-body">
 						<h5 class="mt-0 text-warning">
 							<span>nowcoder</span>
+							<input type="hidden" id="entityId" th:value="${user.id}">
 							<button type="button" class="btn btn-info btn-sm float-right mr-5 follow-btn">关注TA</button>
 						</h5>
 						<div class="text-muted mt-3">

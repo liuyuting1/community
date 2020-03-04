@@ -42,8 +42,21 @@
         from discuss_post
         where id = #{id}
     </select>
-    <update id="updateCommentCount" parameterType="int">
-        update discuss_post set comment_count where  id= #{id}
+    <update id="updateCommentCount">
+        update discuss_post set comment_count = #{CommentCount} where id = #{id}
     </update>
+
+    <update id="updateType">
+        update discuss_post set type = #{type} where id = #{id}
+    </update>
+
+    <update id="updateStatus">
+        update discuss_post set status = #{status} where id = #{id}
+    </update>
+
+    <update id="updateScore">
+        update discuss_post set score = #{score} where id = #{id}
+    </update>
+
 
 </mapper>

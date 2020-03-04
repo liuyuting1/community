@@ -6,6 +6,7 @@ import com.example.community.entity.Page;
 import com.example.community.entity.User;
 import com.example.community.service.CommentService;
 import com.example.community.service.DiscusspostService;
+import com.example.community.service.LikeService;
 import com.example.community.service.UserService;
 import com.example.community.util.CommunityConstant;
 import com.example.community.util.CommunityUtil;
@@ -42,6 +43,10 @@ public class DiscussPostController implements CommunityConstant {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LikeService likeService;
+
+
     @RequestMapping(path = "/ajax",method = RequestMethod.POST)
     @ResponseBody
     public String addDiscussPost(String title, String content) {
@@ -64,6 +69,7 @@ public class DiscussPostController implements CommunityConstant {
 
     @RequestMapping(path = "/detail/{discussPostId}", method = RequestMethod.GET)
     public String getDiscussPost(@PathVariable("discussPostId") int discussPostId, Model model, Page page) {
+//        Integer.valueOf("ahsgdj");
         // 帖子
         DiscussPost post = discusspostService.findDiscussPostById(discussPostId);
         model.addAttribute("post", post);
@@ -108,6 +114,14 @@ public class DiscussPostController implements CommunityConstant {
                         // 回复目标
                         User target = reply.getTarget_id() == 0 ? null : userService.findUserById(reply.getTarget_id());
                         replyVo.put("target", target);
+                        // 点赞数量
+                        long likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_POST, discussPostId);
+                        model.addAttribute("likeCount", likeCount);
+                        // 点赞状态
+                        int likeStatus = hostHolder.getUser() == null ? 0 :
+                                likeService.findEntityLikeStatus(hostHolder.getUser().getId(), ENTITY_TYPE_POST, discussPostId);
+                       replyVo.put("likeStatus", likeStatus);
+
 
                         replyVoList.add(replyVo);
                     }
@@ -123,6 +137,7 @@ public class DiscussPostController implements CommunityConstant {
         }
 
         model.addAttribute("comments", commentVoList);
+//        model.addAttribute("likeStatus", 1);
 
         return "/site/discuss-detail";
     }
